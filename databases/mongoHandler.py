@@ -1,7 +1,4 @@
-import email
-
 from pymongo import MongoClient
-
 class MongoHandler:
     def __init__(self):
         self.client = MongoClient("mongodb+srv://ProjectMongo:Mongo1234@projects.emesx.mongodb.net/?retryWrites=true&w=majority&appName=Projects")
@@ -9,10 +6,10 @@ class MongoHandler:
     def connect(self, databases_name):
         return self.client[databases_name]
 
-    def authenticate(self, username, password):
+    def authenticate(self, nickname, password, email):
         db = self.connect("chat")
-        user = db.users.find_one({"username": username, "password": password})
+        user = db.users.find_one({"nickname": nickname, "password": password, "email": email})
         if user:
-            return True
+            return ("conexão aceita")
         else:
-            return False
+            return ("conexão invalida")
