@@ -38,10 +38,10 @@ def menu(nickname):
             print("opção inválida")
 
 
-def verMensagens(handler, nickname):
-    mensagens = handler.getMessages(nickname)
+def verMensagens(handler, nickname_to):
+    mensagens = handler.getMessages(nickname_to)
     if mensagens:
-        print(f"Mensagens Recebida por: {nickname}")
+        print(f"Mensagens Recebida por: {nickname_to}")
         for mensagen in mensagens:
             print(f"De: {mensagen['nickname_from']}")
             print(f"Mensagem: {mensagen['message']}")

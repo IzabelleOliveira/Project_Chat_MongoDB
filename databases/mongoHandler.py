@@ -16,7 +16,7 @@ class MongoHandler:
         else:
             return False
 
-    def getMessages(self,nickname):
+    def getMessages(self,nickname_to):
         db = self.connect("chat")
-        messages = db.messages.find({"nickname_to": nickname})
+        messages = db.message.find({"nickname_to": nickname_to})
         return list(messages)
