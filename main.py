@@ -1,29 +1,57 @@
 from databases.mongoHandler import MongoHandler
-from databases.entities import User
+from databases.entities import User,Message
 from pymongo import MongoClient
 
-def menu():
-    print('--------------MENU------------')
-    print('----- Bem vindo - Opções:------------')
-    print(' 1 -> Ver Mensagens')
-    print(' 2 -> Enviar Mensagens')
-    print(' 3 -> Sair')
-    opção = int(input('OPÇÃO:'))
-
 def login():
-    usuario = (input('Digite seu nome de usúario: '))
-    senha = (input('Digite sua senha: '))
-    mail = (input('Digite seu email: '))
+    usuario = input('Digite seu nome de usuário: ')
+    senha = input('Digite sua senha: ')
+    mail = input('Digite seu email: ')
+
     handler = MongoHandler()
-    auth = handler.authenticate(nickname= usuario, password= senha, email= mail)
+    auth = handler.authenticate(nickname=usuario, password=senha, email=mail)
+
     if auth:
-        return menu()
+        print("Login bem-sucedido!")
+        menu(nickname=usuario)
     else:
         print("Dados inválidos ou não cadastrados.")
 
 
-#chamar função de login - auth
-#chamar funçao menu
+def menu(nickname):
+    while True:
+        handler = MongoHandler()
+        print('--------------MENU-------------')
+        print('----- Bem Vindo - Opções:------------')
+        print(' 1 -> Mensagens Recebidas')
+        print(' 2 -> Enviar Mensagens')
+        print(' 3 -> Sair')
+        opcao = int(input('OPÇÃO:'))
+
+        if opcao == 1:
+            verMensagens(handler,nickname)
+        elif opcao == 2:
+            print("...")
+        elif opcao == 3:
+            print("Sair...")
+            break
+        else:
+            print("opção inválida")
+
+
+def verMensagens(handler, nickname):
+    mensagens = handler.getMessages(nickname)
+    if mensagens:
+        print(f"Mensagens Recebida por: {nickname}")
+        for mensagen in mensagens:
+            print(f"De: {mensagen['nickname_from']}")
+            print(f"Mensagem: {mensagen['message']}")
+    else:
+        print("Nenhuma mensagem encontrada.")
+
+#def enviarMensagens():
+
+
 if __name__ == '__main__':
     print("----CHAT BOT----")
     login()
+
