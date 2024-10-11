@@ -1,0 +1,14 @@
+aes-pkcs5==1.0.3
+boto3==1.35.36
+botocore==1.35.36
+cffi==1.17.1
+cryptography==43.0.1
+dnspython==2.7.0
+jmespath==1.0.1
+pycparser==2.22
+pymongo==4.10.1
+pymongo-auth-aws==1.3.0
+python-dateutil==2.9.0.post0
+s3transfer==0.10.3
+six==1.16.0
+urllib3==2.2.3
